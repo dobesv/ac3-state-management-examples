@@ -1,10 +1,14 @@
 # apollo-remote-state
 
-Summary: Hooking Apollo Client up to a remote GraphQL API, the client-side cache is smart enough to automatically update the cache after most mutations successfully complete. For mutations that perform interactions against arrays (_cached collections_) or have additional client-side side-effects, we can help the cache decide what to do next by writing our update logic in the `useMutation`'s `update` function.
+This is an example app using TypeScript, React, and GraphQL.
 
 ## Getting started
 
 There is a `client/` and `server/` portion to this example.
+
+### Node Version
+
+This project does not work in recent versions of Node.  Please make sure to use node v14 before running any npm commands.
 
 ### Running the client
 
