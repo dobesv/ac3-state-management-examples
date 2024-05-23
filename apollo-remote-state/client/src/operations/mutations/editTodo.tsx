@@ -1,9 +1,8 @@
 
 
 import { gql, useMutation } from "@apollo/client";
-import * as EditTodoTypes from './__generated__/EditTodo'
 import { GET_ALL_TODOS } from "../queries/getAllTodos";
-import { GetAllTodos } from "../__generated__/GetAllTodos";
+import { EditTodoMutation, EditTodoMutationVariables, GetAllTodosQuery } from "../../generated/graphql";
 
 export const EDIT_TODO = gql`
   mutation EditTodo ($id: Int!, $text: String!) {
@@ -28,13 +27,13 @@ export const EDIT_TODO = gql`
 
 export function useEditTodo () {
   const [mutate, { data, error }] = useMutation<
-    EditTodoTypes.EditTodo, 
-    EditTodoTypes.EditTodoVariables
+    EditTodoMutation,
+    EditTodoMutationVariables
   >(
     EDIT_TODO,
     {
       update: (cache) => {
-        let allTodos = cache.readQuery<GetAllTodos>({
+        let allTodos = cache.readQuery<GetAllTodosQuery>({
           query: GET_ALL_TODOS
         });
 

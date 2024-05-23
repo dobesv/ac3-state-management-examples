@@ -6,7 +6,6 @@ describe('Testing mock reactive variables', () => {
   it('should set the current value if provided', () => {
     mockTodosVar([{
       id: 0, text: 'First todo', completed: false,
-      __typename: "Todo"
     }]);
     expect(mockTodosVar()?.length).toEqual(1);
   })
@@ -14,13 +13,11 @@ describe('Testing mock reactive variables', () => {
   it('should overwrite the current value', () => {
     mockTodosVar([{
       id: 0, text: 'First todo', completed: false,
-      __typename: "Todo"
     }]);
     expect(mockTodosVar()?.length).toEqual(1);
 
     mockTodosVar([{
       id: 1, text: 'Second todo', completed: false,
-      __typename: "Todo"
     }]);
     expect(mockTodosVar()?.length).toEqual(1);
   });
@@ -29,11 +26,9 @@ describe('Testing mock reactive variables', () => {
     mockTodosVar([
       {
         id: 0, text: 'First todo', completed: false,
-        __typename: "Todo"
       },
       {
         id: 1, text: 'Second todo', completed: false,
-        __typename: "Todo"
       }
     ]);
     expect(mockTodosVar()?.length).toEqual(2);

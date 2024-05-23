@@ -1,6 +1,6 @@
 
 import { gql, useMutation } from "@apollo/client";
-import * as CompleteTodoTypes from './__generated__/CompleteTodo'
+import { CompleteTodoMutation, CompleteTodoMutationVariables } from "../../generated/graphql";
 
 export const COMPLETE_TODO = gql`
   mutation CompleteTodo ($id: Int!) {
@@ -25,8 +25,8 @@ export const COMPLETE_TODO = gql`
 
 export function useCompleteTodo () {
   const [mutate, { data, error }] = useMutation<
-    CompleteTodoTypes.CompleteTodo, 
-    CompleteTodoTypes.CompleteTodoVariables
+    CompleteTodoMutation,
+    CompleteTodoMutationVariables
   >(
     COMPLETE_TODO
   )

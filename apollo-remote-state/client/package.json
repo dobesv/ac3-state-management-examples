@@ -3,9 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/introspection": "4.0.3",
+    "@graphql-codegen/typescript": "4.0.7",
     "@types/classnames": "^2.3.1",
     "@types/react-test-renderer": "^18.3.0",
-    "apollo": "^2.34.0",
+    "graphql": "^15.0.0",
     "prettier": "^3.2.5",
     "react-scripts": "^5.0.1",
     "react-test-renderer": "^18.3.1"
@@ -30,7 +33,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test --env=node",
-    "generate": "apollo client:codegen --target typescript --excludes src/operations/queries/getVisibilityFilter.tsx"
+    "codegen": "graphql-codegen --config ./codegen.yml"
   },
   "browserslist": [
     ">0.2%",

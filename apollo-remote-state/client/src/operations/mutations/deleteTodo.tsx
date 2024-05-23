@@ -1,8 +1,7 @@
 
 import { gql, useMutation } from "@apollo/client";
-import * as DeleteTodoTypes from './__generated__/DeleteTodo'
 import { GET_ALL_TODOS } from "../queries/getAllTodos";
-import { GetAllTodos } from "../__generated__/GetAllTodos";
+import { DeleteTodoMutation, DeleteTodoMutationVariables, GetAllTodosQuery } from "../../generated/graphql";
 
 export const DELETE_TODO = gql`
   mutation DeleteTodo ($id: Int!) {
@@ -24,14 +23,14 @@ export const DELETE_TODO = gql`
 
 export function useDeleteTodo () {
   const [mutate, { data, error }] = useMutation<
-    DeleteTodoTypes.DeleteTodo, 
-    DeleteTodoTypes.DeleteTodoVariables
+    DeleteTodoMutation,
+    DeleteTodoMutationVariables
   >(
     DELETE_TODO,
     {
       update (cache, { data }) {
         const deletedTodoId = data?.deleteTodo.todo?.id;
-        const allTodos = cache.readQuery<GetAllTodos>({
+        const allTodos = cache.readQuery<GetAllTodosQuery>({
           query: GET_ALL_TODOS
         });
 

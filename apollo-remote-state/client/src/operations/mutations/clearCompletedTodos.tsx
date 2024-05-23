@@ -1,7 +1,5 @@
-
 import { gql, useMutation } from "@apollo/client";
-import * as ClearCompletedTodosTypes from './__generated__/ClearCompletedTodos'
-import * as GetAllTodosTypes from '../queries/__generated__/GetAllTodos'
+import { ClearCompletedTodosMutation, GetAllTodosQuery } from '../../generated/graphql'
 import { GET_ALL_TODOS } from "../queries/getAllTodos";
 
 export const CLEAR_COMPLETED_TODOS = gql`
@@ -19,12 +17,12 @@ export const CLEAR_COMPLETED_TODOS = gql`
 
 export function useClearCompletedTodos () {
   const [mutate, { data, error }] = useMutation<
-    ClearCompletedTodosTypes.ClearCompletedTodos
+      ClearCompletedTodosMutation
   >(
     CLEAR_COMPLETED_TODOS,
     {
       update (cache) {
-        const allTodos = cache.readQuery<GetAllTodosTypes.GetAllTodos>({
+        const allTodos = cache.readQuery<GetAllTodosQuery>({
           query: GET_ALL_TODOS
         });
 

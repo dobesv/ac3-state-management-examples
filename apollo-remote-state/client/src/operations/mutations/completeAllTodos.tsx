@@ -1,6 +1,5 @@
-
 import { gql, useMutation } from "@apollo/client";
-import * as CompleteAllTodosTypes from './__generated__/CompleteAllTodos'
+import { CompleteAllTodosMutation } from "../../generated/graphql";
 
 export const COMPLETE_ALL_TODOS = gql`
   mutation CompleteAllTodos {
@@ -17,7 +16,7 @@ export const COMPLETE_ALL_TODOS = gql`
 
 export function useCompleteAllTodos () {
   const [mutate, { data, error }] = useMutation<
-    CompleteAllTodosTypes.CompleteAllTodos
+    CompleteAllTodosMutation
   >(
     COMPLETE_ALL_TODOS
   )
