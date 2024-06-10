@@ -6,10 +6,6 @@ This is an example app using TypeScript, React, and GraphQL.
 
 There is a `client/` and `server/` portion to this example.
 
-### Node Version
-
-This project does not work in recent versions of Node.  Please make sure to use node v14 before running any npm commands.
-
 ### Running the client
 
 To start the project, run the following commands:
