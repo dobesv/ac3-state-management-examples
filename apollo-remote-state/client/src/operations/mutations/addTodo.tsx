@@ -4,13 +4,14 @@ import { GET_ALL_TODOS } from "../queries/getAllTodos";
 import { AddTodoMutation, AddTodoMutationVariables, GetAllTodosQuery } from "../../generated/graphql";
 
 export const ADD_TODO = gql`
-  mutation AddTodo ($text: String!) {
-    addTodo (text: $text) {
+  mutation AddTodo ($text: String!, $dueDate: String) {
+    addTodo (text: $text, dueDate: $dueDate) {
       success
       todo {
         id
         text 
         completed
+        dueDate
       }
       error {
         message

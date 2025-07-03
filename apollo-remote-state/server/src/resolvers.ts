@@ -16,10 +16,10 @@ import { Context } from './index'
 
 const resolvers: Resolvers = {
   Mutation: {
-    addTodo: async (_, { text }, context: Context): Promise<AddTodoResult> => {
+    addTodo: async (_, { text, dueDate }, context: Context): Promise<AddTodoResult> => {
       const { todosRepo } = context;
       try {
-        await todosRepo.addTodo(text);
+        await todosRepo.addTodo(text, dueDate);
         const todo = await todosRepo.getLastTodo();
         return { success: true, todo }
       } catch (err) {
@@ -70,7 +70,7 @@ const resolvers: Resolvers = {
       await todosRepo.deleteTodo(id);
       return { success: true, todo };
     },
-    editTodo: async (_, { id, text }, context: Context): Promise<EditTodoResult> => {
+    editTodo: async (_, { id, text, dueDate }, context: Context): Promise<EditTodoResult> => {
       const { todosRepo } = context;
       let todo; 
 
@@ -81,7 +81,7 @@ const resolvers: Resolvers = {
       }
 
       try {
-        await todosRepo.editTodo(id, text)
+        await todosRepo.editTodo(id, text, dueDate)
       } catch (err) {
         return { success: false, error: { message: 'Todo must be greater than 3 chars' } }
       }

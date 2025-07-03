@@ -73,6 +73,7 @@ export type Mutation = {
 
 
 export type MutationAddTodoArgs = {
+  dueDate?: InputMaybe<Scalars['String']['input']>;
   text: Scalars['String']['input'];
 };
 
@@ -88,6 +89,7 @@ export type MutationDeleteTodoArgs = {
 
 
 export type MutationEditTodoArgs = {
+  dueDate?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   text: Scalars['String']['input'];
 };
@@ -122,6 +124,7 @@ export type QueryTodosArgs = {
 export type Todo = {
   __typename?: 'Todo';
   completed: Scalars['Boolean']['output'];
+  dueDate?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   text: Scalars['String']['output'];
 };
@@ -352,6 +355,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = {
   completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  dueDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

@@ -5,13 +5,14 @@ import { GET_ALL_TODOS } from "../queries/getAllTodos";
 import { EditTodoMutation, EditTodoMutationVariables, GetAllTodosQuery } from "../../generated/graphql";
 
 export const EDIT_TODO = gql`
-  mutation EditTodo ($id: Int!, $text: String!) {
-    editTodo (id: $id, text: $text) {
+  mutation EditTodo ($id: Int!, $text: String!, $dueDate: String) {
+    editTodo (id: $id, text: $text, dueDate: $dueDate) {
       success
       todo {
         id
         text 
         completed
+        dueDate
       }
       error {
         ... on TodoNotFoundError {
@@ -47,7 +48,8 @@ export function useEditTodo () {
                     ...t,
                     node: {
                       ...t?.node,
-                      text: data?.editTodo.todo?.text
+                      text: data?.editTodo.todo?.text,
+                      dueDate: data?.editTodo.todo?.dueDate
                     }
                 } : t)
               },

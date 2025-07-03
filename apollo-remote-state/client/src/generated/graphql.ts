@@ -12,7 +12,6 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Upload: { input: any; output: any; }
 };
 
 export type AddTodoResult = {
@@ -21,11 +20,6 @@ export type AddTodoResult = {
   success: Scalars['Boolean']['output'];
   todo?: Maybe<Todo>;
 };
-
-export enum CacheControlScope {
-  Private = 'PRIVATE',
-  Public = 'PUBLIC'
-}
 
 export type ClearCompletedTodosResult = {
   __typename?: 'ClearCompletedTodosResult';
@@ -76,6 +70,7 @@ export type Mutation = {
 
 
 export type MutationAddTodoArgs = {
+  dueDate?: InputMaybe<Scalars['String']['input']>;
   text: Scalars['String']['input'];
 };
 
@@ -91,6 +86,7 @@ export type MutationDeleteTodoArgs = {
 
 
 export type MutationEditTodoArgs = {
+  dueDate?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
   text: Scalars['String']['input'];
 };
@@ -126,6 +122,7 @@ export type QueryTodosArgs = {
 export type Todo = {
   __typename?: 'Todo';
   completed: Scalars['Boolean']['output'];
+  dueDate?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   text: Scalars['String']['output'];
 };
@@ -172,10 +169,11 @@ export type GetLastTodosQuery = { __typename?: 'Query', todos: { __typename?: 'T
 
 export type AddTodoMutationVariables = Exact<{
   text: Scalars['String']['input'];
+  dueDate?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type AddTodoMutation = { __typename?: 'Mutation', addTodo: { __typename?: 'AddTodoResult', success: boolean, todo?: { __typename?: 'Todo', id: number, text: string, completed: boolean } | null, error?: { __typename?: 'TodoValidationError', message: string } | null } };
+export type AddTodoMutation = { __typename?: 'Mutation', addTodo: { __typename?: 'AddTodoResult', success: boolean, todo?: { __typename?: 'Todo', id: number, text: string, completed: boolean, dueDate?: string | null } | null, error?: { __typename?: 'TodoValidationError', message: string } | null } };
 
 export type ClearCompletedTodosMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -204,10 +202,11 @@ export type DeleteTodoMutation = { __typename?: 'Mutation', deleteTodo: { __type
 export type EditTodoMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   text: Scalars['String']['input'];
+  dueDate?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type EditTodoMutation = { __typename?: 'Mutation', editTodo: { __typename?: 'EditTodoResult', success: boolean, todo?: { __typename?: 'Todo', id: number, text: string, completed: boolean } | null, error?: { __typename?: 'TodoNotFoundError', message: string } | { __typename?: 'TodoValidationError', message: string } | null } };
+export type EditTodoMutation = { __typename?: 'Mutation', editTodo: { __typename?: 'EditTodoResult', success: boolean, todo?: { __typename?: 'Todo', id: number, text: string, completed: boolean, dueDate?: string | null } | null, error?: { __typename?: 'TodoNotFoundError', message: string } | { __typename?: 'TodoValidationError', message: string } | null } };
 
 export type GetAllTodosQueryVariables = Exact<{ [key: string]: never; }>;
 

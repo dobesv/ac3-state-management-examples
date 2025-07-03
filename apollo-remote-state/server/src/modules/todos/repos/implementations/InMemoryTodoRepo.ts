@@ -3,20 +3,20 @@ import { Todo } from "../../../../generated/graphql";
 
 export class InMemoryTodoRepo implements TodoRepo {
   private todos: Todo[] = [
-    { id: 1, text: "Getting started", completed: false },
-    { id: 2, text: "Second todo", completed: false },
-    { id: 3, text: "Third todo", completed: false },
+    { id: 1, text: "Getting started", completed: false, dueDate: "2024-07-01" },
+    { id: 2, text: "Second todo", completed: false, dueDate: "2024-07-02" },
+    { id: 3, text: "Third todo", completed: false, dueDate: "2024-07-03" },
   ];
 
   private lastTodoId: number = this.todos.length;
 
   constructor() {}
 
-  public async addTodo(text: string): Promise<void> {
+  public async addTodo(text: string, dueDate?: string | null): Promise<void> {
     if (text.length < 3)
       throw new Error("Todo needs to be longer than 3 characters.");
     this.lastTodoId++;
-    this.todos.push({ id: this.lastTodoId, text, completed: false });
+    this.todos.push({ id: this.lastTodoId, text, completed: false, dueDate });
     console.log("addTodo ->", this.todos);
   }
 
@@ -37,7 +37,7 @@ export class InMemoryTodoRepo implements TodoRepo {
     console.log("deleteTodo ->", this.todos);
   }
 
-  public async editTodo(id: number, text: string): Promise<void> {
+  public async editTodo(id: number, text: string, dueDate?: string | null): Promise<void> {
     if (text.length < 3)
       throw new Error("Todo needs to be longer than 3 characters.");
     const found = this.todos.findIndex((t) => t.id === id);
@@ -46,6 +46,9 @@ export class InMemoryTodoRepo implements TodoRepo {
     }
 
     this.todos[found].text = text;
+    if (dueDate !== undefined) {
+      this.todos[found].dueDate = dueDate;
+    }
     console.log("editTodo ->", this.todos);
   }
 

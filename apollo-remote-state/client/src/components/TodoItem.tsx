@@ -21,11 +21,11 @@ export default class TodoItem extends Component<Props, Props> {
     this.setState({ editing: true })
   }
 
-  handleSave = (id: number, text: string) => {
+  handleSave = (id: number, text: string, dueDate?: string) => {
     if (text.length === 0) {
       this.props.deleteTodo(id)
     } else {
-      this.props.editTodo(id, text)
+      this.props.editTodo(id, text, dueDate)
     }
     this.setState({ editing: false })
   }
@@ -37,8 +37,9 @@ export default class TodoItem extends Component<Props, Props> {
     if (this.state.editing) {
       element = (
         <TodoTextInput text={todo.text}
+                       dueDate={todo.dueDate}
                        editing={this.state.editing}
-                       onSave={(text: string) => this.handleSave(todo.id, text)} />
+                       onSave={(text: string, dueDate?: string) => this.handleSave(todo.id, text, dueDate)} />
       )
     } else {
       element = (
@@ -51,6 +52,7 @@ export default class TodoItem extends Component<Props, Props> {
                  }} />
           <label onDoubleClick={this.handleDoubleClick}>
             {todo.text}
+            {todo.dueDate && <span className="due-date"> (Due: {todo.dueDate})</span>}
           </label>
           <button className="destroy"
                   onClick={() => deleteTodo(todo.id)} />

@@ -12,6 +12,7 @@ const typeDefs = gql`
     id: Int!
     text: String! 
     completed: Boolean!
+    dueDate: String
   }
 
   type TodosEdge {
@@ -88,12 +89,12 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addTodo (text: String!): AddTodoResult!
+    addTodo (text: String!, dueDate: String): AddTodoResult!
     clearCompletedTodos: ClearCompletedTodosResult!
     completeTodo (id: Int!): CompleteTodoResult!
     completeAllTodos: CompleteAllTodosResult!
     deleteTodo (id: Int!): DeleteTodoResult!
-    editTodo (id: Int!, text: String!): EditTodoResult!
+    editTodo (id: Int!, text: String!, dueDate: String): EditTodoResult!
   }
 `
 
